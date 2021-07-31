@@ -42,8 +42,8 @@ class TeamsController < ApplicationController
     if current_user.owner?(@working_team)
       @working_team.owner_id = params[:id]
       @working_team.save
-      # new_leader = @working_team.owner
-      # NewLeaderMailer.new_leader_mail(new_leader).deliver
+      new_leader = @working_team.owner
+      NewLeaderMailer.new_leader_mail(new_leader).deliver
       redirect_to team_path(@working_team), notice: '権限を移動しました'
     else
       redirect_to team_path(@working_team), notice: '権限を移動できませんでした'
